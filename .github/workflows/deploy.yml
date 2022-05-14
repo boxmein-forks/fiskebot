@@ -4,7 +4,7 @@ on:
       - forked_fiskebot 
 
 env:
-  DOCKER_IMAGE: ghcr.io/boxmein-forks/fiskebot
+  DOCKER_IMAGE: ghcr.io/team-europe/fiskebot
 
 jobs:
   deploy:
