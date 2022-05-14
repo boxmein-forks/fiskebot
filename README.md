@@ -1,6 +1,9 @@
 # fiskebot
 ![](images/fiskebot_logo.png)
 
+#[Add to server (restricted)](https://discord.com/oauth2/authorize?&client_id=974943220620480572&scope=bot&permissions=8)
+
+
 This bot is still work in process. It is a fork of [eptbot](https://github.com/ept-team/eptbot), which is again a fork of [igCTF](https://gitlab.com/inequationgroup/igCTF), which is again a fork of [NullCTF](https://github.com/NullPxl/NullCTF).
 
 ## Install
