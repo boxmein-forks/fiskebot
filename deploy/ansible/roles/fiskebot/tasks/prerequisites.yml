@@ -1,0 +1,9 @@
+- name: docker python has to be installed on the server
+  pip:
+    name: docker
+    state: present
+
+- name: docker-compose has to be installed on the server
+  pip:
+    name: docker-compose
+    state: present

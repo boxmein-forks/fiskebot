@@ -1,0 +1,53 @@
+- include_tasks: prerequisites.yml
+
+- name: fiskebot folder
+  file:
+    path: /opt/fiskebot
+    state: directory
+    owner: ec2-user
+    group: ec2-user
+    mode: 0700
+
+- name: deploy fiskebot 
+  community.docker.docker_compose:
+    project_name: fiskebot
+    definition: 
+      version: "2.1"
+      services:
+        bot:
+          image: ghcr.io/team-europe/fiskebot
+          restart: unless-stopped
+          environment:
+            DISCORD_TOKEN: '{{ discord_token }}'
+            MONGODB_URI: mongodb://mongo:27017
+            LOGGING_LEVEL: INFO
+            LOGGING_DISCORD_LEVEL: ERROR
+            ARCHIVE_ACCESS_TO_ALL_USERS: 'f'
+            COMMAND_PREFIX: '!'
+            MAINTAINERS: '{{ maintainer_ids | join(",") }}'
+            GUILD_IDS: '{{ guild_ids | join(",") }}'
+            CATEGORY_WORKING: ctfbotworking
+            CATEGORY_DONE: ctfbotdone
+            CATEGORY_ARCHIVE_PREFIX: ctfbotarchive
+            CHANNEL_EXPORT: ctfbotexport
+            CHANNEL_LOGGING_ID: '0'
+            CHANNEL_NAME_DELIMITER: '-'
+            CTFTIME_TEAM_ID: '-1'
+            CTFTIME_TEAM_NAME: ''
+          volumes:
+            - /opt/fiskebot/backups:/home/bot/backups
+          depends_on:
+            - mongo
+          stop_signal: SIGKILL
+        mongo:
+          image: mongo:4.4.5
+          restart: always
+          ports:
+            - "127.0.0.1:27017:27017"
+          volumes:
+            - mdb:/data/db
+            - mdb_config:/data/configdb
+
+      volumes:
+        mdb:
+        mdb_config:

@@ -6,6 +6,10 @@
 
 This bot is still work in process. It is a fork of [eptbot](https://github.com/ept-team/eptbot), which is again a fork of [igCTF](https://gitlab.com/inequationgroup/igCTF), which is again a fork of [NullCTF](https://github.com/NullPxl/NullCTF).
 
+## Deployment guide
+
+Use the ansible playbook under deploy/ansible to push it onto a server. 
+
 ## Install
 
 Configuration is done through environment variables. They can be defined in an `.env` file, or used directly, see [here](https://docs.docker.com/compose/environment-variables/) for more information.
