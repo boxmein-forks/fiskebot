@@ -1,7 +1,7 @@
 on: 
   push:
     branches:
-      - master 
+      - forked_fiskebot 
 
 env:
   DOCKER_IMAGE: ghcr.io/boxmein-forks/fiskebot
