@@ -12,9 +12,6 @@ jobs:
     steps:
       - uses: actions/checkout@v2
       - run: |
-        docker build \
-          -t ${{ env.DOCKER_IMAGE }} \
-          -f Dockerfile \
-          .
+          docker build -t ${{ env.DOCKER_IMAGE }} -f Dockerfile .
       - run: |
-        docker push ${{ env.DOCKER_IMAGE }}
+          docker push ${{ env.DOCKER_IMAGE }}
