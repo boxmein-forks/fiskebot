@@ -8,7 +8,28 @@ This bot is still work in process. It is a fork of [eptbot](https://github.com/e
 
 ## Deployment guide
 
-Use the ansible playbook under deploy/ansible to push it onto a server. 
+The "prod version" currently uses the Discord tokens and AWS resources of of @boxmein.  
+
+In order to deploy, get a code change merged into `forked_fiskebot` branch, 
+and wait for the CI deploy pipeline to succeed. 
+
+Then, ask @boxmein to run the ansible playbook.
+
+## Making a new prod environment
+
+- Create a Discord Application, and copy the client ID
+- In the Discord Application page, click Bot > New bot. Copy the bot token
+- Replace the Client ID in the "Add to server" link above in the readme
+- Replace the `discord_token` variable in `deploy/ansible/roles/fiskebot/vars/main.yml`, if you want to utilize Ansible Vault: 
+    - `ansible-vault encrypt_string --ask-vault-pass --stdin-name discord_token`
+    - Enter a new encryption key for the discord token
+    - Enter the discord token / data to be encrypted
+    - Replace discord_token's value with the new ciphertext
+- Create a new VPS
+    - Install docker
+    - Ensure SSH access
+- Change the `ansible_host` and `ansible_user` variables of `host_vars/teameu_boxmein.yml` to properly access the new VPS via ssh
+- Run the deploy.sh script
 
 ## Install
 
