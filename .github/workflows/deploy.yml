@@ -1,0 +1,20 @@
+on: 
+  push:
+    branches:
+      - master 
+
+env:
+  DOCKER_IMAGE: ghcr.io/boxmein-forks/fiskebot
+
+jobs:
+  deploy:
+    runs-on: ubuntu-latest
+    steps:
+      - uses: actions/checkout@v2
+      - run: |
+        docker build \
+          -t ${{ env.DOCKER_IMAGE }} \
+          -f Dockerfile \
+          .
+      - run: |
+        docker push ${{ env.DOCKER_IMAGE }}
